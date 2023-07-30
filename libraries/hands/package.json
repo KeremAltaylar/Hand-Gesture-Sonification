@@ -1,0 +1,58 @@
+{
+  "_from": "@mediapipe/hands",
+  "_id": "@mediapipe/hands@0.3.1630010197",
+  "_inBundle": false,
+  "_integrity": "sha512-xSVWlV4zl3RXJod8+eO0o0QqLL83D94hcKSEm0lHVcQqufzBLo+Qaes20p0wj4c+UEHT7BNNNdUXk9L18r13/w==",
+  "_location": "/@mediapipe/hands",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@mediapipe/hands",
+    "name": "@mediapipe/hands",
+    "escapedName": "@mediapipe%2fhands",
+    "scope": "@mediapipe",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@mediapipe/hands/-/hands-0.3.1630010197.tgz",
+  "_shasum": "60c6630a9d17481d91569fead6d57903da19d054",
+  "_spec": "@mediapipe/hands",
+  "_where": "/Users/metalblade",
+  "author": {
+    "name": "mhays@google.com"
+  },
+  "browser": {
+    "node-fetch": false,
+    "util": false,
+    "crypto": false
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Mediapipe Hands Solution",
+  "devDependencies": {},
+  "homepage": "https://google.github.io/mediapipe/solutions/hands",
+  "jsdelivr": "hands.js",
+  "keywords": [
+    "AR",
+    "ML",
+    "Augmented"
+  ],
+  "license": "Apache-2.0",
+  "main": "hands.js",
+  "module": "hands.js",
+  "name": "@mediapipe/hands",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "sideEffects": [],
+  "types": "index.d.ts",
+  "unpkg": "hands.js",
+  "version": "0.3.1630010197"
+}
