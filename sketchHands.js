@@ -16,21 +16,12 @@ let sketch = function (p) {
     p.clear();
     if (detections != undefined) {
       if (detections.multiHandLandmarks != undefined) {
-        p.drawHands();
-        //p.drawParts();
         p.drawLines([0, 5, 9, 13, 17, 0]); //palm
         p.drawLines([0, 1, 2, 3, 4]); //thumb
         p.drawLines([5, 6, 7, 8]); //index finger
         p.drawLines([9, 10, 11, 12]); //middle finger
         p.drawLines([13, 14, 15, 16]); //ring finger
         p.drawLines([17, 18, 19, 20]); //pinky
-        p.drawLandmarks([0, 1], 0); //palm base
-        p.drawLandmarks([1, 5], 60); //thumb
-        p.drawLandmarks([5, 9], 120); //index finger
-        p.drawLandmarks([9, 13], 180); //middle finger
-        p.drawLandmarks([13, 17], 240); //ring finger
-        p.drawLandmarks([17, 21], 300); //pinky
-        //console.log(detections);
       }
     }
   };
@@ -39,13 +30,10 @@ let sketch = function (p) {
     for (let i = 0; i < detections.multiHandLandmarks.length; i++) {
       for (let j = 0; j < detections.multiHandLandmarks[i].length; j++) {
         let x = detections.multiHandLandmarks[i][j].x * p.windowWidth;
-        let y = detections.multiHandLandmarks[i][j].y * p.windoHeight;
+        let y = detections.multiHandLandmarks[i][j].y * p.windowHeight;
         let z = detections.multiHandLandmarks[i][j].z;
-        p.strokeWeight(0);
-        p.textFont("Helvetica Neue");
-        p.text(j, x, y);
         p.stroke(0);
-        p.strokeWeight(10);
+        p.strokeWeight(6);
         p.point(x, y);
       }
     }
@@ -74,11 +62,15 @@ let sketch = function (p) {
 
   p.drawLines = function (index) {
     p.stroke(0, 0, 0);
-    p.strokeWeight(3);
+    p.strokeWeight(2);
     for (let i = 0; i < detections.multiHandLandmarks.length; i++) {
+      const size = p.getHandSize(i);
+      if (size < 0.3) {
+        continue;
+      }
       for (let j = 0; j < index.length - 1; j++) {
         let x = detections.multiHandLandmarks[i][index[j]].x * p.windowWidth;
-        let y = detections.multiHandLandmarks[i][index[j]].y * p.windoHeight;
+        let y = detections.multiHandLandmarks[i][index[j]].y * p.windowHeight;
         // let z = detections.multiHandLandmarks[i][index[j]].z;
 
         let _x =
@@ -86,9 +78,27 @@ let sketch = function (p) {
         let _y =
           detections.multiHandLandmarks[i][index[j + 1]].y * p.windowHeight;
         // let _z = detections.multiHandLandmarks[i][index[j+1]].z;
-        p.line(windowWidth - x, y, windowWidth - _x, _y);
+        p.line(x, y, _x, _y);
       }
     }
+  };
+  p.getHandSize = function (handIndex) {
+    const lm = detections.multiHandLandmarks[handIndex];
+    let minX = 1,
+      minY = 1,
+      maxX = 0,
+      maxY = 0;
+    for (let i = 0; i < lm.length; i++) {
+      const x = Math.min(Math.max(lm[i].x, 0), 1);
+      const y = Math.min(Math.max(lm[i].y, 0), 1);
+      if (x < minX) minX = x;
+      if (y < minY) minY = y;
+      if (x > maxX) maxX = x;
+      if (y > maxY) maxY = y;
+    }
+    const w = maxX - minX;
+    const h = maxY - minY;
+    return Math.sqrt(w * w + h * h);
   };
 };
 

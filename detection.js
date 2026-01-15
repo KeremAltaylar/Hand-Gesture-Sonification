@@ -10,8 +10,9 @@ let hands = new Hands({
 
 hands.setOptions({
   maxNumHands: 2,
-  minDetectionConfidence: 0.9,
-  minTrackingConfidence: 0.7,
+  selfieMode: true,
+  minDetectionConfidence: 0.7,
+  minTrackingConfidence: 0.5,
 });
 
 hands.onResults(gotHands);
@@ -25,8 +26,8 @@ const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({ image: videoElement });
   },
-  width: 480,
-  height: 360,
+  width: 360,
+  height: 270,
   // width: windowWidth,
   // height: windowHeight,
 });

@@ -28,4 +28,6 @@ body {
   z-index:-1;
   border: 3px #fff solid;
 	border-radius: 10px;
+  transform: scaleX(-1);
+  transform-origin: center;
 }
